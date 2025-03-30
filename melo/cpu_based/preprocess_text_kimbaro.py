@@ -8,10 +8,10 @@ from tqdm import tqdm
 import click
 import os
 import torch
-from text.cleaner import clean_text_bert
-from text.symbols import symbols, num_tones
+from melo.text.cleaner import clean_text_bert
+from melo.text.symbols import symbols, num_tones
 
-#  python .\preprocess_text_kimbaro.py -o test/ -i test/ -e cpu
+#  python .\preprocess_text_kimbaro.py -o dev/ -i dev/ -e cpu
 
 def execute(max_val_total: int, val_per_spk: int, n_speakers: int, num_languages: int, output_path: str, engine: str,
             input_path: str):
