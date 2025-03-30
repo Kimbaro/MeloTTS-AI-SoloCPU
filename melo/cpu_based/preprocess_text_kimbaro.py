@@ -11,7 +11,7 @@ import torch
 from melo.text.cleaner import clean_text_bert
 from melo.text.symbols import symbols, num_tones
 
-#  python .\preprocess_text_kimbaro.py -o dev/ -i dev/ -e cpu
+#  python .\preprocess_text_kimbaro.py -o cpu_based/dev/ -i cpu_based/dev/ -e cpu
 
 def execute(max_val_total: int, val_per_spk: int, n_speakers: int, num_languages: int, output_path: str, engine: str,
             input_path: str):

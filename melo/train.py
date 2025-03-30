@@ -14,7 +14,7 @@ import logging
 logging.getLogger("numba").setLevel(logging.WARNING)
 import commons
 import utils
-from data_utils import (
+from melo.data_utils import (
     TextAudioSpeakerLoader,
     TextAudioSpeakerCollate,
     DistributedBucketSampler,

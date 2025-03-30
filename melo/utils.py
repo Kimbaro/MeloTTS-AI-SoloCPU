@@ -9,14 +9,13 @@ from scipy.io.wavfile import read
 import torch
 import torchaudio
 import librosa
-from melo.text import cleaned_text_to_sequence, get_bert
-from melo.text.cleaner import clean_text
+from melo.text import cleaned_text_to_sequence as cleaned_text_to_sequence, get_bert as get_bert
+from melo.text.cleaner import clean_text as clean_text
 from melo import commons
 
 MATPLOTLIB_FLAG = False
 
 logger = logging.getLogger(__name__)
-
 
 
 def get_text_for_tts_infer(text, language_str, hps, device, symbol_to_id=None):
@@ -57,15 +56,16 @@ def get_text_for_tts_infer(text, language_str, hps, device, symbol_to_id=None):
     language = torch.LongTensor(language)
     return bert, ja_bert, phone, tone, language
 
+
 def load_checkpoint(checkpoint_path, model, optimizer=None, skip_optimizer=False):
     assert os.path.isfile(checkpoint_path)
     checkpoint_dict = torch.load(checkpoint_path, map_location="cpu")
     iteration = checkpoint_dict.get("iteration", 0)
     learning_rate = checkpoint_dict.get("learning_rate", 0.)
     if (
-        optimizer is not None
-        and not skip_optimizer
-        and checkpoint_dict["optimizer"] is not None
+            optimizer is not None
+            and not skip_optimizer
+            and checkpoint_dict["optimizer"] is not None
     ):
         optimizer.load_state_dict(checkpoint_dict["optimizer"])
     elif optimizer is None and not skip_optimizer:
@@ -138,13 +138,13 @@ def save_checkpoint(model, optimizer, learning_rate, iteration, checkpoint_path)
 
 
 def summarize(
-    writer,
-    global_step,
-    scalars={},
-    histograms={},
-    images={},
-    audios={},
-    audio_sampling_rate=22050,
+        writer,
+        global_step,
+        scalars={},
+        histograms={},
+        images={},
+        audios={},
+        audio_sampling_rate=22050,
 ):
     for k, v in scalars.items():
         writer.add_scalar(k, v, global_step)
@@ -226,9 +226,11 @@ def load_wav_to_torch(full_path):
 
 
 def load_wav_to_torch_new(full_path):
-    audio_norm, sampling_rate = torchaudio.load(full_path, frame_offset=0, num_frames=-1, normalize=True, channels_first=True)
+    audio_norm, sampling_rate = torchaudio.load(full_path, frame_offset=0, num_frames=-1, normalize=True,
+                                                channels_first=True)
     audio_norm = audio_norm.mean(dim=0)
     return audio_norm, sampling_rate
+
 
 def load_wav_to_torch_librosa(full_path, sr):
     audio_norm, sampling_rate = librosa.load(full_path, sr=sr, mono=True)
@@ -255,11 +257,11 @@ def get_hparams(init=True):
     parser.add_argument('--port', type=int, default=10000)
     parser.add_argument("-m", "--model", type=str, required=True, help="Model name")
     parser.add_argument('--pretrain_G', type=str, default=None,
-                            help='pretrain model')
+                        help='pretrain model')
     parser.add_argument('--pretrain_D', type=str, default=None,
-                            help='pretrain model D')
+                        help='pretrain model D')
     parser.add_argument('--pretrain_dur', type=str, default=None,
-                            help='pretrain model duration')
+                        help='pretrain model duration')
 
     args = parser.parse_args()
     model_dir = os.path.join("./logs", args.model)

@@ -19,16 +19,16 @@ from torch.optim import AdamW
 from melo.models import SynthesizerTrn, DurationDiscriminator, MultiPeriodDiscriminator
 
 logging.getLogger("numba").setLevel(logging.WARNING)
-import commons
-import utils
+import melo.commons as commons
+import melo.utils as utils
 from melo.data_utils import (
     TextAudioSpeakerLoader,
     TextAudioSpeakerCollate,
 )
 
-from losses import generator_loss, discriminator_loss, feature_loss, kl_loss
-from mel_processing import mel_spectrogram_torch, spec_to_mel_torch
-from text.symbols import symbols
+from melo.losses import generator_loss, discriminator_loss, feature_loss, kl_loss
+from melo.mel_processing import mel_spectrogram_torch, spec_to_mel_torch
+from melo.text.symbols import symbols
 from torch.nn import DataParallel
 
 
@@ -691,5 +691,5 @@ if __name__ == "__main__":
     run(args.c, args.model, args.pretrain_G, args.pretrain_D, args.pretrain_dur)
 
 """
-python train.py --c test/config.json --model KR-default --pretrain_G test/training/G_0.pth --pretrain_D test/training/D_0.pth --pretrain_dur test/training/DUR.pth
+python train.py --c cpu_based/dev/train/config.json --model KR-default --pretrain_G cpu_based/dev/train/G_0.pth --pretrain_D cpu_based/dev/train/D_0.pth --pretrain_dur cpu_based/dev/train/DUR.pth
 """

@@ -4,11 +4,12 @@ import torch
 import torch.utils.data
 from tqdm import tqdm
 from loguru import logger
-import commons
-from mel_processing import spectrogram_torch, mel_spectrogram_torch
-from utils import load_filepaths_and_text
-from utils import load_wav_to_torch_librosa as load_wav_to_torch
-from text import cleaned_text_to_sequence, get_bert
+from melo import commons
+from melo.mel_processing import spectrogram_torch as spectrogram_torch, mel_spectrogram_torch as mel_spectrogram_torch
+from melo.utils import load_filepaths_and_text
+from melo.utils import load_wav_to_torch_librosa as load_wav_to_torch
+from melo.text import cleaned_text_to_sequence as cleaned_text_to_sequence, get_bert as get_bert
+
 import numpy as np
 
 """Multi speaker version"""
@@ -49,7 +50,6 @@ class TextAudioSpeakerLoader(torch.utils.data.Dataset):
         random.shuffle(self.audiopaths_sid_text)
         self._filter()
 
-
     def _filter(self):
         """
         Filter text & store spec lengths
@@ -63,7 +63,7 @@ class TextAudioSpeakerLoader(torch.utils.data.Dataset):
         skipped = 0
         logger.info("Init dataset...")
         for item in tqdm(
-            self.audiopaths_sid_text
+                self.audiopaths_sid_text
         ):
             try:
                 _id, spk, language, text, phones, tone, word2ph = item
@@ -81,7 +81,7 @@ class TextAudioSpeakerLoader(torch.utils.data.Dataset):
                 lengths.append(os.path.getsize(audiopath) // (2 * self.hop_length))
             else:
                 skipped += 1
-        logger.info(f'min: {min(lengths)}; max: {max(lengths)}' )
+        logger.info(f'min: {min(lengths)}; max: {max(lengths)}')
         logger.info(
             "skipped: "
             + str(skipped)
@@ -293,13 +293,13 @@ class DistributedBucketSampler(torch.utils.data.distributed.DistributedSampler):
     """
 
     def __init__(
-        self,
-        dataset,
-        batch_size,
-        boundaries,
-        num_replicas=None,
-        rank=None,
-        shuffle=True,
+            self,
+            dataset,
+            batch_size,
+            boundaries,
+            num_replicas=None,
+            rank=None,
+            shuffle=True,
     ):
         super().__init__(dataset, num_replicas=num_replicas, rank=rank, shuffle=shuffle)
         self.lengths = dataset.lengths
@@ -338,8 +338,8 @@ class DistributedBucketSampler(torch.utils.data.distributed.DistributedSampler):
             len_bucket = len(buckets[i])
             total_batch_size = self.num_replicas * self.batch_size
             rem = (
-                total_batch_size - (len_bucket % total_batch_size)
-            ) % total_batch_size
+                          total_batch_size - (len_bucket % total_batch_size)
+                  ) % total_batch_size
             num_samples_per_bucket.append(len_bucket + rem)
         return buckets, num_samples_per_bucket
 
@@ -368,21 +368,21 @@ class DistributedBucketSampler(torch.utils.data.distributed.DistributedSampler):
             # add extra samples to make it evenly divisible
             rem = num_samples_bucket - len_bucket
             ids_bucket = (
-                ids_bucket
-                + ids_bucket * (rem // len_bucket)
-                + ids_bucket[: (rem % len_bucket)]
+                    ids_bucket
+                    + ids_bucket * (rem // len_bucket)
+                    + ids_bucket[: (rem % len_bucket)]
             )
 
             # subsample
-            ids_bucket = ids_bucket[self.rank :: self.num_replicas]
+            ids_bucket = ids_bucket[self.rank:: self.num_replicas]
 
             # batching
             for j in range(len(ids_bucket) // self.batch_size):
                 batch = [
                     bucket[idx]
                     for idx in ids_bucket[
-                        j * self.batch_size : (j + 1) * self.batch_size
-                    ]
+                               j * self.batch_size: (j + 1) * self.batch_size
+                               ]
                 ]
                 batches.append(batch)
 

@@ -5,17 +5,14 @@ import torch
 from torch.nn import functional as F
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
-import torch.distributed as dist
-from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.cuda.amp import autocast, GradScaler
 from tqdm import tqdm
 import logging
-from torch.nn.utils.parametrizations import weight_norm  # ✅ 변경된 weight_norm 임포트
 
 logging.getLogger("numba").setLevel(logging.WARNING)
 import commons
 import utils
-from data_utils import (
+from melo.data_utils import (
     TextAudioSpeakerLoader,
     TextAudioSpeakerCollate,
     DistributedBucketSampler,
@@ -24,7 +21,6 @@ from melo.models import SynthesizerTrn, DurationDiscriminator, MultiPeriodDiscri
 from losses import generator_loss, discriminator_loss, feature_loss, kl_loss
 from mel_processing import mel_spectrogram_torch, spec_to_mel_torch
 from text.symbols import symbols
-from melo.download_utils import load_pretrain_model
 
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = (
