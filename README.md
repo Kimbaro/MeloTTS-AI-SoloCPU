@@ -9,7 +9,7 @@ MeloTTS는 **VITS AI 기반 신경망 음성 합성 모델**을 활용하며, �
 - [MeloTTS GitHub](https://github.com/myshell-ai/MeloTTS)
 - [Korean Single Speaker Speech Dataset](https://www.kaggle.com/datasets/bryanpark/korean-single-speaker-speech-dataset)
 - [OpenVoice 기반 프레임워크](https://github.com/Nyan-SouthKorea/RealTime_zeroshot_TTS_ko)
-- [아카라이브 AI 음성채널](https://arca.live/b/aispeech/103703271)
+- [아카라이브 AI MeloTTS fine turning 방식 질문](https://arca.live/b/aispeech/103703271)
 - [아카라이브 AI melotts 한국어 학습 팁](https://arca.live/b/aispeech/103056950)
 
 ### ✅ 실행 환경
