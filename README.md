@@ -1,57 +1,32 @@
-<div align="center">
-  <div>&nbsp;</div>
-  <img src="logo.png" width="300"/> <br>
-  <a href="https://trendshift.io/repositories/8133" target="_blank"><img src="https://trendshift.io/api/badge/repositories/8133" alt="myshell-ai%2FMeloTTS | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-</div>
+## 3️⃣ MeloTTS 기반 TTS 구축 및 추론(Pre-trained TTS) 학습 가이드
 
-## Introduction
-MeloTTS is a **high-quality multi-lingual** text-to-speech library by [MIT](https://www.mit.edu/) and [MyShell.ai](https://myshell.ai). Supported languages include:
+MeloTTS는 **VITS AI 기반 신경망 음성 합성 모델**을 활용하며, 추론 및 제로샷 학습이 가능합니다.
 
-| Language | Example |
-| --- | --- |
-| English (American)    | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/en/EN-US/speed_1.0/sent_000.wav) |
-| English (British)     | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/en/EN-BR/speed_1.0/sent_000.wav) |
-| English (Indian)      | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/en/EN_INDIA/speed_1.0/sent_000.wav) |
-| English (Australian)  | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/en/EN-AU/speed_1.0/sent_000.wav) |
-| English (Default)     | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/en/EN-Default/speed_1.0/sent_000.wav) |
-| Spanish               | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/es/ES/speed_1.0/sent_000.wav) |
-| French                | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/fr/FR/speed_1.0/sent_000.wav) |
-| Chinese (mix EN)      | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/zh/ZH/speed_1.0/sent_008.wav) |
-| Japanese              | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/jp/JP/speed_1.0/sent_000.wav) |
-| Korean                | [Link](https://myshell-public-repo-host.s3.amazonaws.com/myshellttsbase/examples/kr/KR/speed_1.0/sent_000.wav) |
+### 📌 레퍼런스(감사합니다)
 
-Some other features include:
-- The Chinese speaker supports `mixed Chinese and English`.
-- Fast enough for `CPU real-time inference`.
+- [MeloTTS GitHub](https://github.com/myshell-ai/MeloTTS)
+- [Korean Single Speaker Speech Dataset](https://www.kaggle.com/datasets/bryanpark/korean-single-speaker-speech-dataset)
+- [OpenVoice 기반 프레임워크](https://github.com/Nyan-SouthKorea/RealTime_zeroshot_TTS_ko)
+- [아카라이브 AI 음성채널](https://arca.live/b/aispeech/103703271)
+- [아카라이브 AI melotts 한국어 학습 팁](https://arca.live/b/aispeech/103056950)
 
-## Usage
-- [Use without Installation](docs/quick_use.md)
-- [Install and Use Locally](docs/install.md)
-- [Training on Custom Dataset](docs/training.md)
+### ✅ 실행 환경
 
-The Python API and model cards can be found in [this repo](https://github.com/myshell-ai/MeloTTS/blob/main/docs/install.md#python-api) or on [HuggingFace](https://huggingface.co/myshell-ai).
+- **OS**: Windows
+- **언어**: Python 3.9.0
+- **개발 도구**: PyCharm IDE
 
-**Contributing**
+### ✅ 실행 방법
 
-If you find this work useful, please consider contributing to this repo.
+1. pip install -r MeloTTS-AI-SoloCPU/requirements.txt
+2. infertypekimbaro.py 텍스트 전처리, config 구성
+3. train_kimbaro.py 추론학습 수행
+4. infertypekimbaro.py TTS 생성 수행
 
-- Many thanks to [@fakerybakery](https://github.com/fakerybakery) for adding the Web UI and CLI part.
+### ✅ 강화 학습
 
-## Authors
+[강화 학습 가이드](https://github.com/myshell-ai/MeloTTS/blob/main/docs/training.md)를 참고하여 진행합니다. 학습 데이터는 [Kaggle 데이터셋](https://www.kaggle.com/datasets/bryanpark/korean-single-speaker-speech-dataset)을 활용했습니다.
 
-- [Wenliang Zhao](https://wl-zhao.github.io) at Tsinghua University
-- [Xumin Yu](https://yuxumin.github.io) at Tsinghua University
-- [Zengyi Qin](https://www.qinzy.tech) (project lead) at MIT and MyShell
-
-**Citation**
-```
-@software{zhao2024melo,
-  author={Zhao, Wenliang and Yu, Xumin and Qin, Zengyi},
-  title = {MeloTTS: High-quality Multi-lingual Multi-accent Text-to-Speech},
-  url = {https://github.com/myshell-ai/MeloTTS},
-  year = {2023}
-}
-```
 
 ## License
 
