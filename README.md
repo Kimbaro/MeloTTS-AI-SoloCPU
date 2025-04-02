@@ -1,6 +1,8 @@
 ## 3️⃣ MeloTTS 기반 TTS 구축 및 추론(Pre-trained TTS) 학습 가이드
 
 MeloTTS는 **VITS AI 기반 신경망 음성 합성 모델**을 활용하며, 추론 및 제로샷 학습이 가능합니다.
+- develop 단계임을 유의바랍니다.
+- MacOS 의 경우 CPU 지원이 불가합니다.
 
 ### 📌 레퍼런스(감사합니다)
 
