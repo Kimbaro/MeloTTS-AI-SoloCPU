@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>TTS 웹 인터페이스</title>
+</head>
+<body>
+    <h2>TTS 생성</h2>
+    <form method="post">
+        <label for="text">텍스트 입력:</label><br>
+        <textarea name="text" rows="4" cols="50"></textarea><br><br>
+
+        <label for="gender">성별:</label>
+        <select name="gender">
+            <option value="남성">남성</option>
+            <option value="여성">여성</option>
+        </select><br><br>
+
+        <input type="submit" value="생성하기">
+    </form>
+
+    {% if audio_file %}
+        <h3>결과</h3>
+        <audio controls>
+            <source src="{{ url_for('static', filename='audio/' + audio_file) }}" type="audio/wav">
+        </audio>
+    {% endif %}
+</body>
+</html>
